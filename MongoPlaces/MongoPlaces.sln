@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlaces.Web", "MongoPlaces.Web\MongoPlaces.Web.csproj", "{D32A694C-39D6-46FB-81F3-2F2329BAD75C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlaces.Core.Services", "MongoPlaces.Core.Services\MongoPlaces.Core.Services.csproj", "{6ED1E925-3509-41F2-995E-CBCDC77997D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlaces.Core.DataAccess", "MongoPlaces.Core.DataAccess\MongoPlaces.Core.DataAccess.csproj", "{0B053A24-E215-4233-A189-66BE4B59B745}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D32A694C-39D6-46FB-81F3-2F2329BAD75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32A694C-39D6-46FB-81F3-2F2329BAD75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32A694C-39D6-46FB-81F3-2F2329BAD75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32A694C-39D6-46FB-81F3-2F2329BAD75C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED1E925-3509-41F2-995E-CBCDC77997D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED1E925-3509-41F2-995E-CBCDC77997D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED1E925-3509-41F2-995E-CBCDC77997D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED1E925-3509-41F2-995E-CBCDC77997D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B053A24-E215-4233-A189-66BE4B59B745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B053A24-E215-4233-A189-66BE4B59B745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B053A24-E215-4233-A189-66BE4B59B745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B053A24-E215-4233-A189-66BE4B59B745}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
