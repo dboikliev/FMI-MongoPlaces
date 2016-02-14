@@ -37,6 +37,12 @@ namespace MongoPlaces.Core.DataAccess.Implementations
             return await cursor.ToListAsync();
         }
 
+        public async Task<IEnumerable<PointOfInterest>> GetByType(string type)
+        {
+            var cursor = Collection.Find(Builders<PointOfInterest>.Filter.Eq(p => p.Type, type)).Sort(Builders<PointOfInterest>.Sort.Descending(p => p.FavoritsCount));
+            return await cursor.ToListAsync();
+        }
+
         public async Task IncrementFavoritesCount(string id)
         {
             await
@@ -89,7 +95,7 @@ namespace MongoPlaces.Core.DataAccess.Implementations
         {
             //var cursor = Collection.Aggregate().Match($"{{$geoNear: {{ near: [{longitude}, {latitude}]}}}}").Limit(take);
             var cursor = await
-                Collection.FindAsync(Builders<PointOfInterest>.Filter.Near(p => p.Location, latitude, longitude));
+                Collection.FindAsync(Builders<PointOfInterest>.Filter.Near(p => p.Location, longitude, latitude));
             return (await cursor.ToListAsync()).Take(take);
         }
     }

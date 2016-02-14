@@ -33,7 +33,8 @@ namespace MongoPlaces.Web.Controllers
                     Longitude = p.Location.Longitude
                 },
                 FavoritesCount = p.FavoritesCount,
-                Name = p.Name
+                Name = p.Name,
+                SelectedType = p.Type
             });
             ViewData["LocationTypes"] = await _locationTypesService.GetAllAsync();
             return View("Index", points);
@@ -90,7 +91,7 @@ namespace MongoPlaces.Web.Controllers
         public async Task<ActionResult> AddToFavorites(string id)
         {
             await _pointsOfInterestService.AddToFavoritesAsync(User.Identity.Name, id);
-            return RedirectToAction("List");
+            return RedirectToAction("ListFavorites");
         }
 
         public async Task<ActionResult> Nearest(double latitude, double longitude, int take = 5)
@@ -110,6 +111,19 @@ namespace MongoPlaces.Web.Controllers
         {
             _pointsOfInterestService.RemoveFromFavorites(User.Identity.Name, id);
             return RedirectToAction("ListFavorites");
+        }
+
+        public async Task<ActionResult> ListSimilar(string type)
+        {
+            var points = (await _pointsOfInterestService.GetByType(type)).Select(p => new PointOfInterestViewModel
+            {
+                Id = p.Id,
+                Description = p.Description,
+                Location = new LocationViewModel { Latitude = p.Location.Latitude, Longitude = p.Location.Longitude },
+                SelectedType = p.Type,
+                Name = p.Name
+            });
+            return View("List", points);
         }
     }
 }

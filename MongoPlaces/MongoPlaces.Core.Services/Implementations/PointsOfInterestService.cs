@@ -30,7 +30,8 @@ namespace MongoPlaces.Core.Services.Implementations
                     X = p.Location.Longitude,
                     Y = p.Location.Latitude
                 },
-                Type = p.Type
+                Type = p.Type,
+                Name = p.Name
             });
         }
 
@@ -46,7 +47,8 @@ namespace MongoPlaces.Core.Services.Implementations
                 },
                 Description = p.Description,
                 IsFavorite = p.IsFavorite,
-                Type = p.Type
+                Type = p.Type,
+                Name = p.Name
             });
             return points;
         }
@@ -64,7 +66,8 @@ namespace MongoPlaces.Core.Services.Implementations
                 },
                 Description = p.Description,
                 IsFavorite = p.IsFavorite,
-                Type = p.Type
+                Type = p.Type,
+                Name = p.Name
 
             });
             return points;
@@ -89,7 +92,8 @@ namespace MongoPlaces.Core.Services.Implementations
                 Description = p.Description,
                 IsFavorite = p.IsFavorite,
                 Type = p.Type,
-                FavoritesCount = p.FavoritsCount
+                FavoritesCount = p.FavoritsCount,
+                Name = p.Name
             });
             return points;
         }
@@ -106,7 +110,8 @@ namespace MongoPlaces.Core.Services.Implementations
                 },
                 Description = p.Description,
                 IsFavorite = p.IsFavorite,
-                Type = p.Type
+                Type = p.Type,
+                Name = p.Name
             });
             return points;
         }
@@ -115,6 +120,24 @@ namespace MongoPlaces.Core.Services.Implementations
         {
             await _usersRepository.RemoveFromFavorites(email, id);
             await _pointsOfInterestRepository.DecrementFavoritesCount(id);
+        }
+
+        public async Task<IEnumerable<PointOfInterestDto>> GetByType(string type)
+        {
+            var points = (await _pointsOfInterestRepository.GetByType(type)).Select(p => new PointOfInterestDto()
+            {
+                Id = p.Id.ToString(),
+                Location = new LocationDto()
+                {
+                    Longitude = p.Location.X,
+                    Latitude = p.Location.Y
+                },
+                Description = p.Description,
+                IsFavorite = p.IsFavorite,
+                Type = p.Type,
+                Name = p.Name
+            });
+            return points;
         }
     }
 }

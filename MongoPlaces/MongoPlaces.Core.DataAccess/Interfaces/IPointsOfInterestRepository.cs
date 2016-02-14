@@ -18,5 +18,6 @@ namespace MongoPlaces.Core.DataAccess.Interfaces
         Task<IEnumerable<PointOfInterest>> GetNearestPointsOfInterest(double latitude, double longitude, int take);
         Task IncrementFavoritesCount(string id);
         Task DecrementFavoritesCount(string id);
+        Task<IEnumerable<PointOfInterest>> GetByType(string type);
     }
 }

@@ -76,9 +76,16 @@
 
 
             var form = '<form action="/Map/AddToFavorites" method="post"><input name="id" type="hidden" value="' + location.id + '"/> <input type="submit" value="Add to favorites"/></form>';
+            if (!location.id) {
+                form = '';
+            }
+            var searchType = '<a href="/Map/ListSimilar?type=' + location.type + '">Find similar</a>';
+            if (!location.type) {
+                searchType = '';
+            }
             var contentString = 
       '<p>' + (location.desc == undefined ? "" : location.desc) + '</p>' +
-      '<p><a href="/Map/Nearest?latitude=' + lat + '&longitude=' + lng + '&take=5">5 nearest locations</a></p>' + @(User.Identity.IsAuthenticated ? "form" : "''");
+      '<p><a href="/Map/Nearest?latitude=' + lat + '&longitude=' + lng + '&take=5">5 nearest locations</a></p>' + searchType + @(User.Identity.IsAuthenticated ? "form" : "''");
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
