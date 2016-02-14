@@ -35,6 +35,11 @@ namespace MongoPlaces.Core.Services.Implementations
         public async Task<UserDto> GetAsync(string username)
         {
             var user = await _usersRepository.FindByEmailAsync(username);
+            if (user == null)
+            {
+                return null;
+            }
+
             return new UserDto
             {
                 Email = user.Email

@@ -31,6 +31,17 @@ namespace MongoPlaces.Web.Controllers
             return View();
         }
 
+        public async Task<ActionResult> Details()
+        {
+            var user = await _usersService.GetAsync(User.Identity.Name);
+            if (user == null)
+            {
+                return View("Details", new UserViewModel() );
+            }
+
+            return View("Details", new UserViewModel() { Email = user.Email });
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -54,7 +65,7 @@ namespace MongoPlaces.Web.Controllers
             ModelState.AddModelError("", "Invalid username or password.");
             return View(model);
         }
-        
+
 
         //
         // GET: /Account/Register
@@ -78,14 +89,14 @@ namespace MongoPlaces.Web.Controllers
                     ModelState.AddModelError("", "The email is already taken.");
                     return View(model);
                 }
-                await  _usersService.CreateAsync(new UserDto() {Email = model.Email, Password = model.Password});
+                await _usersService.CreateAsync(new UserDto() { Email = model.Email, Password = model.Password });
                 FormsAuthentication.SetAuthCookie(model.Email, false);
                 return RedirectToAction("Index", "Home");
             }
 
             return View(model);
         }
-        
+
 
         //
         // POST: /Account/LogOff
@@ -96,7 +107,7 @@ namespace MongoPlaces.Web.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-        
+
 
         #region Helpers
 

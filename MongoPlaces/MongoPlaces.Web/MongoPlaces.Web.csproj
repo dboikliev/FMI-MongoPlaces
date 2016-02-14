@@ -235,6 +235,7 @@
     <Compile Include="Models\MapViewModel.cs" />
     <Compile Include="Models\PointOfInterestViewModel.cs" />
     <Compile Include="Models\PointsOfInterestListViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -286,6 +287,7 @@
     <Content Include="Views\Map\AddPointOfInterest.cshtml" />
     <Content Include="Views\Map\List.cshtml" />
     <Content Include="Views\Map\ListFavorites.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
