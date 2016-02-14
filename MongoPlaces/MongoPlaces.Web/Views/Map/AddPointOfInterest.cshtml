@@ -2,6 +2,11 @@
 
 @using (Html.BeginForm("AddPointOfInterest", "Map"))
 {
+    @Html.ValidationSummary()
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </div>
     <div>
         @Html.LabelFor(m => m.Description)
         @Html.EditorFor(m => m.Description)

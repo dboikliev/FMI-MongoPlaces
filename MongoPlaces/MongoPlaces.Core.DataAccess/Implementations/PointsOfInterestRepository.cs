@@ -33,8 +33,22 @@ namespace MongoPlaces.Core.DataAccess.Implementations
 
         public async Task<IEnumerable<PointOfInterest>> GetAll()
         {
-            var cursor = await Collection.FindAsync(FilterDefinition<PointOfInterest>.Empty);
+            var cursor = Collection.Find(FilterDefinition<PointOfInterest>.Empty).Sort(Builders<PointOfInterest>.Sort.Descending(p => p.FavoritsCount));
             return await cursor.ToListAsync();
+        }
+
+        public async Task IncrementFavoritesCount(string id)
+        {
+            await
+                Collection.UpdateOneAsync(Builders<PointOfInterest>.Filter.Eq(p => p.Id, new ObjectId(id)),
+                    Builders<PointOfInterest>.Update.Inc(p => p.FavoritsCount, 1));
+        }
+
+        public async Task DecrementFavoritesCount(string id)
+        {
+            await
+                Collection.UpdateOneAsync(Builders<PointOfInterest>.Filter.Eq(p => p.Id, new ObjectId(id)),
+                    Builders<PointOfInterest>.Update.Inc(p => p.FavoritsCount, -1));
         }
 
         public async Task<IEnumerable<PointOfInterest>> GetPointsOfInterestForUser(string username, bool includeFavorites = false)
@@ -44,10 +58,23 @@ namespace MongoPlaces.Core.DataAccess.Implementations
             return await cursor.ToListAsync();
         }
 
-        public async Task<IEnumerable<PointOfInterest>> GetFavoritePointsOfInterestForUser(string username)
+        public Task<IEnumerable<PointOfInterest>> GetFavoritePointsOfInterestForUser(string username)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<IEnumerable<PointOfInterest>> GetFavoritePointsOfInterestForUser(string username, ObjectId[] favoritePointIds)
         {
             var cursor = await Collection.FindAsync(Builders<PointOfInterest>.Filter.And(Builders<PointOfInterest>.Filter.Eq(p => p.IsFavorite, true)));
             return await cursor.ToListAsync();
+        }
+
+        public async Task<IEnumerable<PointOfInterest>> GetFavoritePointsOfInterestForUser(User user)
+        {
+            return
+                await
+                    Collection.Find(Builders<PointOfInterest>.Filter.In(p => p.Id, user.FavoritePlaces ?? Enumerable.Empty<ObjectId>()))
+                        .ToListAsync();
         }
 
         public async Task SetIsFavorite(string id, string username, bool isFavorite)

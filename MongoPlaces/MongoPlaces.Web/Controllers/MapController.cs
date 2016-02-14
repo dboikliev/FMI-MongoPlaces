@@ -31,7 +31,9 @@ namespace MongoPlaces.Web.Controllers
                 {
                     Latitude = p.Location.Latitude,
                     Longitude = p.Location.Longitude
-                }
+                },
+                FavoritesCount = p.FavoritesCount,
+                Name = p.Name
             });
             ViewData["LocationTypes"] = await _locationTypesService.GetAllAsync();
             return View("Index", points);
@@ -49,32 +51,36 @@ namespace MongoPlaces.Web.Controllers
                     Longitude = model.Location.Longitude
                 },
                 User = User.Identity.Name,
-                Type = model.SelectedType
+                Type = model.SelectedType,
+                Name = model.Name
             });
             return RedirectToAction("Index");
         }
         [Authorize]
         public async Task<ActionResult> List()
         {
-            var points = (await _pointsOfInterestService.GetPointsOfInterest(User.Identity.Name, includeFavorites: false)).Select(p => new PointOfInterestViewModel
+            var points = (await _pointsOfInterestService.GetPointsOfInterest()).Select(p => new PointOfInterestViewModel
             {
                 Id = p.Id,
                 Description = p.Description,
                 Location = new LocationViewModel { Latitude = p.Location.Latitude, Longitude = p.Location.Longitude },
-                SelectedType = p.Type
+                SelectedType = p.Type,
+                FavoritesCount = p.FavoritesCount,
+                Name = p.Name
             });
             return View(points);
         }
 
         [Authorize]
-        public async Task<ActionResult> Favorites()
+        public async Task<ActionResult> ListFavorites()
         {
             var points = (await _pointsOfInterestService.GetFavoritePointsOfInterest(User.Identity.Name)).Select(p => new PointOfInterestViewModel
             {
                 Id = p.Id,
                 Description = p.Description,
                 Location = new LocationViewModel { Latitude = p.Location.Latitude, Longitude = p.Location.Longitude },
-                SelectedType = p.Type
+                SelectedType = p.Type,
+                Name = p.Name
             });
             return View(points);
         }
@@ -94,9 +100,16 @@ namespace MongoPlaces.Web.Controllers
                 Id = p.Id,
                 Description = p.Description,
                 Location = new LocationViewModel { Latitude = p.Location.Latitude, Longitude = p.Location.Longitude },
-                SelectedType = p.Type
+                SelectedType = p.Type,
+                Name = p.Name
             });
-            return View("List", new PointsOfInterestListViewModel() { NonFavoritePoints = points, FavoritePoints = Enumerable.Empty<PointOfInterestViewModel>()});
+            return View("List", points);
+        }
+
+        public ActionResult Remove(string id)
+        {
+            _pointsOfInterestService.RemoveFromFavorites(User.Identity.Name, id);
+            return RedirectToAction("ListFavorites");
         }
     }
 }

@@ -28,6 +28,11 @@
             @Html.Label("Type");
             @Html.DisplayFor(m => point.SelectedType)
         </div>
+        using (Html.BeginForm("Remove", "Map"))
+        {
+            @Html.Hidden("id", point.Id)
+            <input type="submit" value="Remove from favorites"/>
+        }
         <br />
         <br />
     }

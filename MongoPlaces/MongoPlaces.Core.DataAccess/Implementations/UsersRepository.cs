@@ -32,5 +32,26 @@ namespace MongoPlaces.Core.DataAccess.Implementations
         {
             await Collection.UpdateOneAsync(Builders<User>.Filter.Eq(u => u.Email, username), Builders<User>.Update.AddToSet(u => u.FavoritePlaces, new ObjectId(placeId)));
         }
+
+        public async Task<ObjectId[]> GetFavoritePointIds(string email)
+        {
+            var result =
+                await Collection.FindAsync(Builders<User>.Filter.Eq(u => u.Email, email), new FindOptions<User, User>()
+                {
+                    Projection =
+                        Builders<User>.Projection.Include(u => u.FavoritePlaces)
+                            .Exclude(u => u.Id)
+                            .Exclude(u => u.PasswordHash)
+                            .Exclude(u => u.SaltHash)
+                            .Exclude(u => u.Email)
+                });
+            return (await result.ToListAsync()).SelectMany(u => u.FavoritePlaces).ToArray();
+        }
+
+        public async Task RemoveFromFavorites(string email, string id)
+        {
+            await Collection.UpdateOneAsync(Builders<User>.Filter.Eq(u => u.Email, email),
+                Builders<User>.Update.Pull(u => u.FavoritePlaces, new ObjectId(id)));
+        }
     }
 }

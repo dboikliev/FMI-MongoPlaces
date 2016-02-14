@@ -12,7 +12,11 @@ namespace MongoPlaces.Core.DataAccess.Interfaces
         Task<IEnumerable<PointOfInterest>> GetAll();
         Task<IEnumerable<PointOfInterest>> GetPointsOfInterestForUser(string username, bool includeFavorites = false);
         Task<IEnumerable<PointOfInterest>> GetFavoritePointsOfInterestForUser(string username);
+
+        Task<IEnumerable<PointOfInterest>> GetFavoritePointsOfInterestForUser(User user);
         Task SetIsFavorite(string id, string username, bool isFavorite);
         Task<IEnumerable<PointOfInterest>> GetNearestPointsOfInterest(double latitude, double longitude, int take);
+        Task IncrementFavoritesCount(string id);
+        Task DecrementFavoritesCount(string id);
     }
 }

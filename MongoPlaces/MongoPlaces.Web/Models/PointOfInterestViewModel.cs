@@ -15,7 +15,9 @@ namespace MongoPlaces.Web.Models
         public string Description { get; set; }
         [Required]
         public string SelectedType { get; set; }
-
+        [Required]
+        public string Name { get; set; }
         public IEnumerable<string> Types { get; set; }
+        public int FavoritesCount { get; set; }
     }
 }
