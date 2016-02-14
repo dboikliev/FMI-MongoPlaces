@@ -1,0 +1,15 @@
+﻿@using Microsoft.Ajax.Utilities
+@using MongoPlaces.Web.Models
+@model IEnumerable<MongoPlaces.Web.Models.PointOfInterestViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="map"></div>
+
+@foreach (var poi in Model)
+{
+    @Html.Hidden("poi", $"{poi.Location.Latitude.ToStringInvariant() };{poi.Location.Longitude.ToStringInvariant()};{Html.Encode(poi.Description)};{Html.Encode(poi.SelectedType)};{poi.Id}", new { @class = "pois" })
+    
+}
+
+@Html.Partial("AddPointOfInterest", new PointOfInterestViewModel())

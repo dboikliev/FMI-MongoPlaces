@@ -1,0 +1,21 @@
+﻿@model MongoPlaces.Web.Models.PointOfInterestViewModel
+
+@using (Html.BeginForm("AddPointOfInterest", "Map"))
+{
+    <div>
+        @Html.LabelFor(m => m.Description)
+        @Html.EditorFor(m => m.Description)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Location.Longitude)
+        @Html.EditorFor(m => m.Location.Longitude)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Location.Latitude)
+        @Html.EditorFor(m => m.Location.Latitude)
+    </div>
+    <div>
+        @Html.DropDownListFor(m => m.SelectedType, ((IEnumerable<string>)ViewData["LocationTypes"]).Select(t => new SelectListItem() { Text = t, Value = t }))
+    </div>
+    <input type="submit" value="Add"/>
+}

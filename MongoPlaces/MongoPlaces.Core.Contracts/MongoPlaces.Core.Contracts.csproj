@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6ED1E925-3509-41F2-995E-CBCDC77997D0}</ProjectGuid>
+    <ProjectGuid>{5C3ACAC0-01F5-4E1A-8508-941CA650C4C0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MongoPlaces.Core.Services</RootNamespace>
-    <AssemblyName>MongoPlaces.Core.Services</AssemblyName>
+    <RootNamespace>MongoPlaces.Core.Contracts</RootNamespace>
+    <AssemblyName>MongoPlaces.Core.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson, Version=2.2.3.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.2.3\lib\net45\MongoDB.Bson.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,27 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\PaswordHash.cs" />
-    <Compile Include="Implementations\LocationTypesService.cs" />
-    <Compile Include="Implementations\PointsOfInterestService.cs" />
-    <Compile Include="Implementations\UsersService.cs" />
-    <Compile Include="Interfaces\ILocationTypesService.cs" />
-    <Compile Include="Interfaces\IPointsOfInterestService.cs" />
-    <Compile Include="Interfaces\IUsersService.cs" />
+    <Compile Include="Dto\LocationDto.cs" />
+    <Compile Include="Dto\PointOfInterestDto.cs" />
+    <Compile Include="Dto\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MongoPlaces.Core.Contracts\MongoPlaces.Core.Contracts.csproj">
-      <Project>{5c3acac0-01f5-4e1a-8508-941ca650c4c0}</Project>
-      <Name>MongoPlaces.Core.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MongoPlaces.Core.DataAccess\MongoPlaces.Core.DataAccess.csproj">
-      <Project>{0b053a24-e215-4233-a189-66be4b59b745}</Project>
-      <Name>MongoPlaces.Core.DataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

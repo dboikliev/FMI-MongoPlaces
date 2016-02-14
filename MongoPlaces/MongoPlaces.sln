@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlaces.Core.Services",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlaces.Core.DataAccess", "MongoPlaces.Core.DataAccess\MongoPlaces.Core.DataAccess.csproj", "{0B053A24-E215-4233-A189-66BE4B59B745}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlaces.Core.Contracts", "MongoPlaces.Core.Contracts\MongoPlaces.Core.Contracts.csproj", "{5C3ACAC0-01F5-4E1A-8508-941CA650C4C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0B053A24-E215-4233-A189-66BE4B59B745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B053A24-E215-4233-A189-66BE4B59B745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B053A24-E215-4233-A189-66BE4B59B745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3ACAC0-01F5-4E1A-8508-941CA650C4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3ACAC0-01F5-4E1A-8508-941CA650C4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3ACAC0-01F5-4E1A-8508-941CA650C4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3ACAC0-01F5-4E1A-8508-941CA650C4C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

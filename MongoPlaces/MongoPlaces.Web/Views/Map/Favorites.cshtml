@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model IEnumerable<MongoPlaces.Web.Models.PointOfInterestViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @foreach (var point in Model)
+    {
+        <div>
+            @Html.Label("Latitude");
+            @Html.DisplayFor(m => point.Location.Latitude)
+        </div>
+        <div>
+            @Html.Label("Longitude");
+            @Html.DisplayFor(m => point.Location.Longitude)
+        </div>
+        <div>
+            @Html.Label("Description");
+            @Html.DisplayFor(m => point.Description)
+        </div>
+        <div>
+            @Html.Label("Type");
+            @Html.DisplayFor(m => point.SelectedType)
+        </div>
+        <br />
+        <br />
+    }
+</div>
