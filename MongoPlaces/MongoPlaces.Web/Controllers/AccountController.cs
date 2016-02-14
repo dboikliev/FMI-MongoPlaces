@@ -73,6 +73,11 @@ namespace MongoPlaces.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if ((await _usersService.GetAsync(model.Email)) != null)
+                {
+                    ModelState.AddModelError("", "The email is already taken.");
+                    return View(model);
+                }
                 await  _usersService.CreateAsync(new UserDto() {Email = model.Email, Password = model.Password});
                 FormsAuthentication.SetAuthCookie(model.Email, false);
                 return RedirectToAction("Index", "Home");
